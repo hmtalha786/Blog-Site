@@ -1,0 +1,26 @@
+.footer_wrapper {
+  /* height: 500px; */
+  width: 100%;
+  background-color: #222831;
+  color: white;
+  text-align: center;
+}
+.footer_Blog_image {
+  height: 70px;
+  width: 80px;
+}
+.footer_heading {
+  font-size: 25px;
+  font-weight: bold;
+}
+.footer_questions {
+  display: flex;
+  justify-content: end;
+  padding: 0px 20px;
+}
+.footer_Latest_blog {
+  /* padding: 0px 30px; */
+  display: flex;
+  justify-content: end;
+
+}
