@@ -1,53 +1,49 @@
-const path = require('path')
-
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
-
-  // Define a template for blog post
-  const blogPost = path.resolve('./src/templates/blog-post.js')
-
-  const result = await graphql(
-    `
-      {
-        allContentfulBlogPost {
-          nodes {
+exports.createPages = async function ({ graphql, actions }) {
+  const { createPage } = actions;
+  const result = await graphql(`
+    query MyQuery {
+      allContentfulBlogPost {
+        edges {
+          node {
             title
+            miniTitle
+            body {
+              raw
+            }
+            excerpt {
+              excerpt
+            }
             slug
+            publishedDate
+            featuredImage {
+              file {
+                url
+              }
+            }
           }
         }
       }
-    `
-  )
+    }
+  `);
 
-  if (result.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your Contentful posts`,
-      result.errors
-    )
-    return
-  }
+  const path=require('path');
+  console.log("result", result);
+  const blogs=result.data.allContentfulBlogPost.edges;
 
-  const posts = result.data.allContentfulBlogPost.nodes
+    console.log(blogs);
 
-  // Create blog posts pages
-  // But only if there's at least one blog post found in Contentful
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostSlug = index === 0 ? null : posts[index - 1].slug
-      const nextPostSlug =
-        index === posts.length - 1 ? null : posts[index + 1].slug
-
+  blogs.forEach((blog)=>{
+      const blogPost=blog.node;
+      console.log('blogpost',blogPost);
       createPage({
-        path: `/blog/${post.slug}/`,
-        component: blogPost,
-        context: {
-          slug: post.slug,
-          previousPostSlug,
-          nextPostSlug,
-        },
-      })
-    })
-  }
-}
+        path:`/blogs/${blogPost.miniTitle}`,
+        component:path.resolve('./src/templates/blog.tsx'),
+        context:{
+            title:blogPost.title,
+            publishedDate:blogPost.publishedDate,
+            body:blogPost.body.raw,
+            imageUrl:blogPost.featuredImage.file.url,
+        }
+    });
+});
+};
