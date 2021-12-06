@@ -23,7 +23,7 @@
     "@material-ui/styles": "^4.11.2",
     "@reduxjs/toolkit": "^1.5.0",
     "@types/node": "^8.10.66",
-    "@types/react": "15.0.21",
+    "@types/react": "16.8.6",
     "@types/react-dom": "0.14.23",
     "@types/react-redux": "^7.1.11",
     "amazon-cognito-identity-js": "3.0.11",
