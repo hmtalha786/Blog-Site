@@ -1,0 +1,6 @@
+.header {
+    display: flex;
+    text-align: center;
+    background-color: antiquewhite;
+    border-color: azure;
+}

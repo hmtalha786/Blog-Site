@@ -1,0 +1,12 @@
+.card {
+    width: 80px;
+    border-color: antiquewhite;
+    border-width: 1px;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+.img1 {
+    width: 30px;
+}
